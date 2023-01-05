@@ -1,0 +1,116 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.section-landing {
+  background: url("../img/notes.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
+.wrapper-landing {
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  top: 40%;
+}
+
+.wrapper-landing h1 {
+  font-size: 48px;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 100;
+}
+
+.wrapper-landing h2 {
+  font-size: 42px;
+  color: #f2f2f2;
+  opacity: 0.6;
+  margin: 0;
+  font-weight: 100;
+}
+
+.container-login {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  top: 20%;
+}
+
+.wrapper-login {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wrapper-login input {
+  width: 200px;
+  height: 26px;
+  border: 1px solid #cccccc;
+  background-color: #f5f5f5;
+  font-size: 18px;
+  display: block;
+  position: relative;
+  margin: 20px auto;
+}
+
+input::placeholder {
+  color: #4f3603;
+  font-size: 14px;
+}
+
+.wrapper-login h2 {
+  font-size: 40px;
+  text-transform: uppercase;
+}
+
+#submit {
+  width: 200px;
+  height: 42px;
+  border: 1px solid #000000;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 20px;
+  margin: 20px 0px 0px 0px;
+}
+
+#submit:hover {
+  border: 1px solid #4f3603;
+  background-color: #4f3603;
+  transition: 0.3s ease-in;
+}
+
+.options a {
+  color: #4f3603;
+}
+
+.options a:hover {
+  color: #4f3603;
+  transition: 0.2s ease-in;
+  text-decoration: none;
+}
+
+.invalidFeedback {
+  color: #ff0000;
+  display: block;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
