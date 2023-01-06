@@ -1,0 +1,47 @@
+--create DB
+CREATE DATABASE `schedule` /*!40100 DEFAULT CHARACTER SET utf8mb4 */
+---user table
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `username` varchar(200) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4
+
+--notfication table
+CREATE TABLE `notification` (
+  `notification_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `message` text NOT NULL,
+  `date` date DEFAULT NULL,
+  `user_ID` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`notification_ID`),
+  KEY `notification.user_ID.FK1` (`user_ID`),
+  CONSTRAINT `notification.user_ID.FK1` FOREIGN KEY (`user_ID`) REFERENCES `user` (`user_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4
+
+--DUMMY DATA
+INSERT INTO user( 
+		user_id,email, password, username)
+VALUES
+	(7,'profesor@gmail.com','$2y$10$9POOFUkAGRz0TPSH3r/zIeVoXlm2tUt8e.VKBHPqjjCJR3A2mO1JG','Mirko'),
+	(8,'notetest@gmail.com','$2y$10$7RgFT1ir7W2aVLgaR4xiROaDwnAroWexl3w.DAoVG2pcHnmiwi/mu','notetest'),
+	(6,'roki@gmail.com','$2y$10$9POOFUkAGRz0TPSH3r/zIeVoXlm2tUt8e.VKBHPqjjCJR3A2mO1JG','roki123'),
+	(9,'svetlecic.luka@gmail.com','$2y$10$Fp4Af/NG9DVjT8qan34dgOzWV9NOXYUOldBBUOBtsrylZFoJNFqke','svetla123');
+
+INSERT INTO notification( 
+		message, date, user_id, title, created_at)
+VALUES
+	('Poštovani, prema zakazanom roku kolokvij iz navedenoga predmeta odrzati ce se 15.01.','2023-01-15','6','3. kolokvij IIS', '2023-01-05 07:52:48'),
+	('Obavještavam sve studente koji slušaju predmet AiA da pošalju svoje radove do 12.1.','2023-01-12','6','Prezentacija iz AIA', '2023-01-05 07:54:07'),
+	('Nastava iu predemta OOP prema planiranom rasporedu ove subote, neće se održati.','2023-01-28','6','Odgađanje nastave', '2023-01-05 07:56:10'),
+	('Ovom prilikom pozdravljam Vas i želim Vam dobrodošlicu na ovaj predmet. Budite zdravi i vidimo se sutra na predavanju u 20:00.','2023-01-11','9','Dobrodošli na predmet Metodologija', '2023-01-05 08:00:02'),
+	('Nastava 27.1. se neće održati zbog neodgodivih razloga, vidimo se na idućem predavanju.','2023-01-23','9','Odgađanje nastave', '2023-01-05 08:01:36'),
+	('Prema rasporedu, pvaj tjedan radimo na seminarima, pripremite ideje i hipoteze za raspravu.','2023-01-17','9','Seminari', '2023-01-05 08:02:26'),
+	('Poštovani, prema zakazanom roku kolokvij iz navedenoga predmeta odrzati ce se 15.01.','2023-01-15','6','3. kolokvij IIS', '2023-01-05 07:52:48'),
+	('Zamolila bih Vas da pripremite ankete za seminare i da prikupite podataka oko Vaše teme.','2023-01-11','9','Obavijest', '2023-01-05 08:03:36');
+
+
+
