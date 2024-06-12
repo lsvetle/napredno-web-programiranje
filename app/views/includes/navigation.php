@@ -7,6 +7,9 @@
             <a href="<?php echo URLROOT; ?>/notifications/calendar">Calendar</a>
         </li>
         <li>
+            <a href="<?php echo URLROOT; ?>/news/read">News</a>
+        </li>
+        <li>
             <a href="<?php echo URLROOT; ?>/users/register">Register</a>
         </li>
         <li class="btn-login">

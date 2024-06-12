@@ -114,3 +114,18 @@ input::placeholder {
   color: white;
   text-align: center;
 }
+.article-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+.article-title:hover {
+  color: #000000; /* Change color on hover */
+  font-size: 24px;
+}
+
+.article-link {
+  text-decoration: none;
+}

@@ -1,10 +1,14 @@
 <?php
+
+require '../vendor/autoload.php';
+use DeepL\Translator;
 class Notifications extends Controller {
 
     private string  $sorted = "";
     private string $date ="";
     private string $id ="";
     private $dateNow ="";
+    private string $language = "";
 
     public function __construct () {
         $this->notificationModel = $this->model('Notification'); //file name of model
@@ -12,29 +16,60 @@ class Notifications extends Controller {
         $this->date = $_GET['date'] ?? ""; //getting date or ""
         $this->id = $_GET['id'] ?? ""; //getting date or ""
         $this->dateNow = date("Y-m-d");
+        $this->language = $_GET['language'] ?? ""; //getting date or ""
     }
 
     //oppening calendar page (READ)
     public function calendar() {
-
-        if (!$this->date && !$this->id ){
-                $notifications = $this->notificationModel->getAllNotifications($this->sorted);
-        }else if ($this->date) {
-            $notifications = $this->notificationModel->findNotificationsByDate($this->date);
-        }else if ($this->id) {
-            $notifications = $this->notificationModel->findNotificationsByUser($this->id);
-        }else if(!isLoggedIn()){ //if user try to add notification by root
-            header("Location: " . URLROOT . "/notifications/calendar");
+        // Check if the user is logged in
+        if (!isLoggedIn()) {
+            error_log("User not logged in, redirecting to login page.");
+            header("Location: " . URLROOT . "/users/login");
+            return;
         }
-
+    
+        // Variable to store notifications
+        $notifications = [];
+    
+        try {
+            // Fetch and translate notifications based on conditions
+            if ($this->language) {
+                error_log("Fetching and translating notifications for language: " . $this->language);
+                $notifications = $this->notificationModel->getAllNotifications($this->sorted);
+                $authKey = "6ea71f12-4508-4175-a119-1c15d04b64f9:fx"; // Replace with your key
+                $translator = new Translator($authKey);
+    
+                foreach ($notifications as &$notification) {
+                    // Translate the title and description for each notification
+                    $notification->title = $translator->translateText($notification->title, null, $this->language);
+                    $notification->message = $translator->translateText($notification->message, null, $this->language);
+                    error_log("Translated notification ID " . $notification->notification_ID . ": " . $notification->title);
+                }
+            } elseif ($this->date) {
+                error_log("Fetching notifications for date: " . $this->date);
+                $notifications = $this->notificationModel->findNotificationsByDate($this->date);
+            } elseif ($this->id) {
+                error_log("Fetching notifications for user ID: " . $this->id);
+                $notifications = $this->notificationModel->findNotificationsByUser($this->id);
+            } else {
+                error_log("Fetching all notifications sorted: " . $this->sorted);
+                $notifications = $this->notificationModel->getAllNotifications($this->sorted);
+            }
+        } catch (Exception $e) {
+            error_log("Error fetching or translating notifications: " . $e->getMessage());
+        }
+    
+        // Prepare data for view
         $data = [
-            'notifications' =>$notifications,
+            'notifications' => $notifications,
         ];
-
-        $this->view('notifications/calendar', $data);//defining root
-            //notifications iz root-a mora biti isti kao ime kalse 
+    
+        // Load the view with notifications
+        $this->view('notifications/calendar', $data);
+        error_log("Loaded calendar view with notifications.");
     }
-
+    
+    
     public function create() {
         if(!isLoggedIn()){ //if user try to add notification by root
             header("Location: " . URLROOT . "/notifications/calendar");

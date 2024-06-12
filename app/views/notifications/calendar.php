@@ -67,6 +67,16 @@
             var root = document.getElementsByTagName( 'today' )[0]; // '0' to assign the first (and only `HTML` tag)
             root.setAttribute( 'class', 'todayBorder' );
           });
+
+          function showTranslateForm(event) {
+            event.preventDefault();
+            document.getElementById('translateFormContainer').style.display = 'flex';
+          }
+
+          function hideTranslateForm() {
+            document.getElementById('translateFormContainer').style.display = 'none';
+          }
+           
         </script>
 
       <nav class="notificaticationHead">
@@ -99,6 +109,12 @@
           <li>
             <a class="nav-link icon" href ="<?php echo URLROOT;?>/notifications/calendar?sorted=ASC"> 
                 <i class="fa fa-thin fa-arrow-up-wide-short"></i>
+            </a>
+          </li>
+
+          <li>
+            <a class="nav-link icon" href="#" onclick="showTranslateForm(event)"> 
+              <i class="fa fa-language"></i>
             </a>
           </li>
 
@@ -148,16 +164,15 @@
                 </form>
               <?php endif; ?>
 
-              <h2>
-                <?php echo $notification->title ?>
-              </h2> 
-
               <h3 class = "warning">
                 <?php if($notification->date < date("Y-m-d") && $notification->date !="0000-00-00" ): ?>
                 -➤ Notification expired.
                 <?php endif; ?>
               </h3>
 
+              <h3 style="font-size: 1.2em;">
+                <strong><?php echo $notification->title ?></strong>
+              </h3>
               <h3>
                 <?php echo '-➤ Created by: ' . $notification->username . '.'?>
               </h3>
@@ -179,10 +194,33 @@
 
             </div>
           <?php endforeach;  ?>
-      </div>
+
+
+          <!-- Popup form for translation -->
+          <div id="translateFormContainer" class="popup-form-container">
+            <div class="popup-form">
+              <form id="translateForm" action="<?php echo URLROOT . "/notifications/calendar/" ?>" method="GET">
+                <label for="language">Select Language:</label>
+                <select name="language" id="language">
+                  <option value="en">English</option>
+                  <option value="de">German</option>
+                  <option value="es">Spanish</option>
+                  <option value="fr">French</option>
+                  <option value="zh">Chinese</option>
+                </select>
+                <label for="sorted">Select Sort Order:</label>
+                <select name="sorted" id="sorted">
+                  <option value="ASC">Ascending</option>
+                  <option value="DESC">Descending</option>
+                </select>
+                <input type="submit" value="Translate" class="open-btn btnTranslate">
+              </form>
+              <button class="close-btn" onclick="hideTranslateForm()">Close</button>
+            </div>
+          </div>
 
       <div class="footer">
-        <p>&copy; Copyright 2022 Luka Svetlečić</p>
+        <p>&copy; Copyright 2024 Luka Svetlečić</p>
     </div>
   </body>
 </div>

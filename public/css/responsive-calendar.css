@@ -288,6 +288,26 @@ input {
   transition: 0.6s ease-in;
 }
 
+/* btn delete */
+.btnTranslate {
+  padding: 8px;
+  font-size: 16px;
+  color: #fefefe;
+  background-color: #607ace;
+  float: right;
+  font-weight: 100;
+  font-style: italic;
+  margin: 0px 0px;
+  width: 120;
+  height: 40;
+}
+
+.btnTranslate:hover {
+  background-color: #2049a0;
+  color: #ffffff;
+  transition: 0.6s ease-in;
+}
+
 .footer {
   margin-top: 200px;
   position: relative;
@@ -304,4 +324,49 @@ input {
   text-align: center;
   margin-top: 50px;
   margin-bottom: 500px;
+}
+
+
+ /* Styles for the popup form container */
+ .popup-form-container {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Styles for the popup form */
+.popup-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  width: 300px;
+}
+
+.popup-form select, .popup-form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.popup-form .close-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.popup-form .close-btn:hover {
+  background-color: #d32f2f;
 }

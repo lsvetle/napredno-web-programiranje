@@ -1,0 +1,13 @@
+{
+    "require": {
+        "deeplcom/deepl-php": "^1.7",
+        "symfony/http-client": "^7.1",
+        "nyholm/psr7": "^1.8",
+        "jcobhams/newsapi": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
